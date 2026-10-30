@@ -1,0 +1,6 @@
+{
+  "name": "Obsidian Vault",
+  "description": "Enterprise sovereign private cloud storage and encrypted vaults with hardware-level security.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
