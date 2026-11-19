@@ -6,18 +6,129 @@
   }
 }
 
-/* Custom subtle dark scrollbars */
+/* Scrollbar sutil */
 .custom-scroll::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 .custom-scroll::-webkit-scrollbar-track {
-  background: rgba(3, 7, 18, 0.6);
+  background: rgba(3, 7, 18, 0.4);
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.25);
+  background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
 }
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.5);
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* =========================================================
+   REFINAMIENTO DE LETRAS EN MODO OSCURO (Sobrio y legible)
+   ========================================================= */
+.text-blue-400,
+.text-blue-300,
+.text-cyan-400 {
+  color: #e2e8f0 !important;
+}
+
+.text-emerald-400 {
+  color: #cbd5e1 !important;
+}
+
+/* =========================================================
+   MODO CLARO (Se activa con el botón del encabezado)
+   ========================================================= */
+.theme-light,
+.theme-light .bg-\[\#030712\],
+.theme-light .bg-\[\#060a12\] {
+  background-color: #f4f4f5 !important;
+  color: #18181b !important;
+}
+
+.theme-light .bg-\[\#080d17\],
+.theme-light .bg-\[\#080d18\]\/90,
+.theme-light .bg-\[\#0a0f1d\],
+.theme-light .bg-\[\#0c1322\],
+.theme-light .bg-\[\#0c1424\],
+.theme-light .bg-\[\#0c1424\]\/90,
+.theme-light .bg-\[\#0d1527\] {
+  background-color: #ffffff !important;
+  color: #18181b !important;
+}
+
+.theme-light .bg-slate-900\/90,
+.theme-light .bg-slate-900\/40,
+.theme-light .bg-slate-800\/90,
+.theme-light .bg-slate-800\/80,
+.theme-light .bg-slate-800\/60,
+.theme-light .bg-slate-800\/40,
+.theme-light .bg-slate-800 {
+  background-color: #f4f4f5 !important;
+}
+
+.theme-light .from-\[\#0b1426\]\/60,
+.theme-light .to-\[\#080d19\]\/80,
+.theme-light .from-\[\#0c1424\] {
+  --tw-gradient-from: #ffffff !important;
+  --tw-gradient-to: #fafafa !important;
+}
+
+/* Letras en Modo Claro: negro tinta y gris pizarra de alto contraste */
+.theme-light .text-white,
+.theme-light .text-slate-200 {
+  color: #111827 !important;
+}
+
+.theme-light .text-slate-300 {
+  color: #374151 !important;
+}
+
+.theme-light .text-slate-400 {
+  color: #6b7280 !important;
+}
+
+.theme-light .text-blue-400,
+.theme-light .text-blue-300,
+.theme-light .text-cyan-400,
+.theme-light .text-emerald-400 {
+  color: #1f2937 !important;
+}
+
+/* Mantener texto blanco en botones principales sólidos */
+.theme-light .bg-blue-600,
+.theme-light .from-blue-600 {
+  background: #18181b !important;
+  color: #ffffff !important;
+  border-color: #18181b !important;
+}
+.theme-light .bg-blue-600 span,
+.theme-light .from-blue-600 span,
+.theme-light .bg-blue-600 svg,
+.theme-light .from-blue-600 svg {
+  color: #ffffff !important;
+}
+
+/* Bordes nítidos en Modo Claro */
+.theme-light .border-slate-800,
+.theme-light .border-slate-800\/90,
+.theme-light .border-slate-800\/80,
+.theme-light .border-slate-700\/80,
+.theme-light .border-slate-700\/60,
+.theme-light .border-slate-700\/50,
+.theme-light .border-slate-700,
+.theme-light .border-blue-500\/35,
+.theme-light .border-blue-500\/30,
+.theme-light .border-emerald-500\/25 {
+  border-color: #e4e4e7 !important;
+}
+
+.theme-light .divide-slate-800\/60 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e4e4e7 !important;
+}
+
+.theme-light .bg-blue-600\/15,
+.theme-light .bg-blue-500\/20,
+.theme-light .bg-blue-500\/10,
+.theme-light .bg-emerald-500\/10 {
+  background-color: #f4f4f5 !important;
 }

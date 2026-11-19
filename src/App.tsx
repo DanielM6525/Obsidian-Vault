@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   StorageFile, 
   StorageCategory, 
@@ -50,6 +50,15 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState<StorageCategory>('Todos');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Theme State (Oscuro / Claro)
+  const [isLightMode, setIsLightMode] = useState<boolean>(() => {
+    return localStorage.getItem('obsidian_theme_mode') === 'light';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('obsidian_theme_mode', isLightMode ? 'light' : 'dark');
+  }, [isLightMode]);
+
   // Modals & Drawers
   const [inspectFile, setInspectFile] = useState<StorageFile | null>(null);
   const [shareFile, setShareFile] = useState<StorageFile | null>(null);
@@ -66,13 +75,10 @@ export default function App() {
   // Telemetry calculation
   const totalGB = 1000.0; // 1 TB
   const usedGB = useMemo(() => {
-    const baseUsed = 345.2; // Baseline from prototype
     const addedBytes = files.reduce((acc, f) => {
-      // only count files beyond initial 4 if wanted, or compute dynamically
       return acc + f.sizeBytes;
     }, 0);
     const addedGB = (addedBytes / (1024 * 1024 * 1024));
-    // Provide visually faithful number
     return Math.min(totalGB, Number((340.0 + (addedGB * 0.8)).toFixed(1)));
   }, [files]);
 
@@ -168,7 +174,6 @@ export default function App() {
       setIsUploading(false);
       setUploadProgress(0);
 
-      // Add to audit log
       const newLog: AccessAuditLog = {
         id: `log-${Date.now()}`,
         timestamp: 'Hace un momento',
@@ -192,7 +197,6 @@ export default function App() {
 
   // Direct File Download
   const handleDownloadFile = (file: StorageFile) => {
-    // Generate simulated downloadable file
     const element = document.createElement('a');
     const dummyContent = `--- OBSIDIAN VAULT ENCRYPTED ASSET ---\nFile: ${file.name}\nSize: ${file.sizeFormatted}\nCipher: ${file.encryptionCipher}\nChecksum SHA-256: ${file.checksum}\nIntegrity: VERIFIED BY PRIVATE CLOUD NODE\nDataSovereign Cloud 2026`;
     const blob = new Blob([dummyContent], { type: 'text/plain;charset=utf-8' });
@@ -202,7 +206,6 @@ export default function App() {
     element.click();
     document.body.removeChild(element);
 
-    // Audit log
     const downloadLog: AccessAuditLog = {
       id: `log-${Date.now()}`,
       timestamp: 'Hace un momento',
@@ -320,7 +323,7 @@ export default function App() {
   }, [files, activeCategory, searchQuery]);
 
   return (
-    <div className="h-full flex flex-col bg-[#030712] text-slate-200 overflow-hidden select-none font-sans">
+    <div className={`h-full flex flex-col bg-[#030712] text-slate-200 overflow-hidden select-none font-sans transition-colors duration-200 ${isLightMode ? 'theme-light' : ''}`}>
       {/* Toast Notification Container */}
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
 
@@ -349,6 +352,8 @@ export default function App() {
             onSearchChange={setSearchQuery}
             onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
             onShowToast={showToast}
+            isLightMode={isLightMode}
+            onToggleTheme={() => setIsLightMode((prev) => !prev)}
           />
 
           {/* Main Body with Scrollbar */}
@@ -432,7 +437,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* Mobile Bottom Dock (from Image 4) */}
+      {/* Mobile Bottom Dock */}
       <MobileBottomDock
         activeTab={activeTab}
         onSelectTab={(tab) => {
